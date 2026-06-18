@@ -70,4 +70,4 @@ export const generalOrderLink = whatsappLink(
 );
 
 export const itemOrderLink = (itemName: string) =>
-  whatsappLink(`Olá, quero pedir ${itemName} da Bebella Hot Dog.`);
+  whatsappLink(`Olá, quero montar um pedido com ${itemName} da Bebella Hot Dog.`);
