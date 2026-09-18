@@ -85,7 +85,7 @@ def store_confirm(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     row = conn.execute("SELECT * FROM orders WHERE code=?", (code,)).fetchone()
     if not row:
         raise ValueError("pedido não encontrado")
-    if row["status"] not in {"aguardando_loja", "aguardando_cliente"}:
+    if row["status"] != "aguardando_loja":
         raise ValueError(f"pedido está em {row['status']}")
     confirmed = stamp()
     conn.execute("UPDATE orders SET status='confirmado', store_confirmed_at=? WHERE code=?", (confirmed, code))
