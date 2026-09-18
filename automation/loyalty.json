@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "database": "/opt/data/bebella-loyalty.sqlite3",
+  "eligibleProduct": "Hot Dog Tradicional",
+  "reward": "1 Hot Dog Tradicional grátis",
+  "threshold": 20,
+  "carryOver": true,
+  "countOnlyConfirmedOrders": true,
+  "monthlyHistory": true,
+  "redemptionRequiresStoreConfirmation": true
+}

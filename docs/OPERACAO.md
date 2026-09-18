@@ -17,6 +17,29 @@
 6. Enviar mensagem fora de segunda a sexta, das 18h às 23h: Bella deve informar que está fechada.
 7. Concluir um pedido e enviar nova mensagem: deve começar um novo atendimento.
 
+## Fidelidade
+
+O módulo registra somente pedidos confirmados e mantém o histórico mensal no SQLite.
+A cada 20 hot dogs elegíveis, um prêmio de Hot Dog Tradicional fica disponível.
+
+No container Hermes, registre um pedido confirmado usando um identificador único:
+
+```sh
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/loyalty.py \
+  --db /opt/data/bebella-loyalty.sqlite3 record-order \
+  --phone 5586999312177 --hotdogs 2 --order-id PEDIDO-123
+```
+
+Consulte saldo, resgate um prêmio ou gere o relatório do mês:
+
+```sh
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/loyalty.py --db /opt/data/bebella-loyalty.sqlite3 balance --phone 5586999312177
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/loyalty.py --db /opt/data/bebella-loyalty.sqlite3 redeem --phone 5586999312177
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/loyalty.py --db /opt/data/bebella-loyalty.sqlite3 report --month 2026-09
+```
+
+Faça backup do arquivo `bebella-loyalty.sqlite3` junto com os dados do Hermes.
+
 ## Emergência
 
 Ver status do site:
