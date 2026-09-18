@@ -1,0 +1,24 @@
+[Unit]
+Description=Bebella cardapio digital
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=true
+WorkingDirectory=/opt/bebella/current
+Environment=NODE_ENV=production
+Environment=HOSTNAME=127.0.0.1
+Environment=PORT=3010
+Environment=NEXT_TELEMETRY_DISABLED=1
+ExecStart=/usr/local/bin/node /opt/bebella/current/server.js
+Restart=on-failure
+RestartSec=5
+CacheDirectory=bebella-menu
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

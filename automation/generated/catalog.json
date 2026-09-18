@@ -1,0 +1,194 @@
+{
+  "business": {
+    "name": "Bebella Hot Dog",
+    "website": "https://bebellahotdog.com",
+    "address": "Marginal BR 226, Bairro Joia, Timon-MA, próximo à Igreja Filadélfia.",
+    "timezone": "America/Fortaleza",
+    "openingHours": "Segunda a sexta-feira, das 18:00 às 23:00 (horário local de Timon-MA).",
+    "paymentMethods": {
+      "cash": "Espécie",
+      "pix": {
+        "label": "Pix",
+        "key": "86999312177",
+        "keyType": "Telefone",
+        "holderName": "Roberto Alves de Araujo"
+      },
+      "card": "Cartão"
+    },
+    "humanHandoff": "Atendimento humano somente em último caso: reclamação, solicitação explícita de pessoa, dúvida de alergênicos, divergência de preço, falha técnica ou situação que a automação não consiga resolver. Não prometer transferência nem afirmar que alguém foi notificado sem confirmação do sistema.",
+    "orderAcceptance": "A automação conduz o atendimento e prepara o pedido. Não afirmar registro, aceite, pagamento ou envio à cozinha sem confirmação de um sistema; escalar para humano somente em último caso."
+  },
+  "whatsappNumber": "5586999312177",
+  "hotDogs": [
+    {
+      "name": "Simples",
+      "image": "/imagens/simples.png",
+      "ingredients": "Pão, salsicha, carne ou frango, milho verde e batata palha.",
+      "priceCents": 1100
+    },
+    {
+      "name": "Tradicional",
+      "image": "/imagens/tradicional.png",
+      "ingredients": "Pão, salsicha, carne, repolho, cenoura, vinagrete, milho verde e batata palha.",
+      "priceCents": 1300
+    },
+    {
+      "name": "Frango",
+      "image": "/imagens/frango.png",
+      "ingredients": "Pão, salsicha, frango, repolho, cenoura, vinagrete, milho verde e batata palha.",
+      "priceCents": 1300
+    },
+    {
+      "name": "Misto",
+      "image": "/imagens/misto.png",
+      "ingredients": "Pão, salsicha, carne, frango, repolho, cenoura, vinagrete, milho verde e batata palha.",
+      "priceCents": 1300
+    },
+    {
+      "name": "Clássico",
+      "image": "/imagens/classico.png",
+      "ingredients": "Pão, salsicha, carne, frango, presunto, queijo, repolho, cenoura, vinagrete, milho verde e batata palha.",
+      "priceCents": 1500
+    },
+    {
+      "name": "Prato",
+      "image": "/imagens/prato.png",
+      "ingredients": "Pão, salsicha, ovo, carne, frango, repolho, cenoura, alface, tomate, vinagrete, milho verde e batata palha.",
+      "priceCents": 1800
+    },
+    {
+      "name": "Costela Desfiada",
+      "image": "/imagens/costela-desfiada.png",
+      "ingredients": "Pão, salsicha, costela desfiada, queijo mussarela, catupiry, cheddar, cebola caramelizada, milho verde e batata palha.",
+      "priceCents": 1900
+    }
+  ],
+  "combos": [
+    {
+      "name": "3 Clássicos + Guaraná 1L",
+      "priceCents": 5150
+    },
+    {
+      "name": "2 Mistos + Coca-Cola lata 350ml",
+      "priceCents": 3100
+    },
+    {
+      "name": "2 Pratos + Guaraná 1L",
+      "priceCents": 4250
+    },
+    {
+      "name": "2 Pratos",
+      "priceCents": 3450
+    },
+    {
+      "name": "3 Tradicionais + Guaraná 1L",
+      "priceCents": 4550
+    },
+    {
+      "name": "2 Clássicos + Coca-Cola 1L",
+      "priceCents": 3900
+    }
+  ],
+  "additions": [
+    {
+      "name": "Ovo",
+      "priceCents": 300
+    },
+    {
+      "name": "Queijo e Presunto",
+      "priceCents": 450
+    },
+    {
+      "name": "Salsicha",
+      "priceCents": 200
+    },
+    {
+      "name": "Requeijão",
+      "priceCents": 200
+    },
+    {
+      "name": "Cheddar",
+      "priceCents": 200
+    },
+    {
+      "name": "Queijo Mussarela",
+      "priceCents": 400
+    }
+  ],
+  "drinks": [
+    {
+      "name": "Coca-Cola 350ml",
+      "priceCents": 600
+    },
+    {
+      "name": "Coca-Cola Zero 350ml",
+      "priceCents": 600
+    },
+    {
+      "name": "Coca-Cola PET 1L",
+      "priceCents": 1000
+    },
+    {
+      "name": "Coca-Cola PET Zero 1L",
+      "priceCents": 1000
+    },
+    {
+      "name": "Coca-Cola retornável 1L",
+      "priceCents": 1000
+    },
+    {
+      "name": "Coca-Cola retornável Zero 1L",
+      "priceCents": 1000
+    },
+    {
+      "name": "Guaraná Antarctica 350ml",
+      "priceCents": 600
+    },
+    {
+      "name": "Fanta Laranja 350ml",
+      "priceCents": 600
+    },
+    {
+      "name": "Fanta Uva 350ml",
+      "priceCents": 600
+    },
+    {
+      "name": "Guaraná Antarctica 1L",
+      "priceCents": 800
+    },
+    {
+      "name": "Suco natural sob consulta",
+      "priceCents": 600
+    }
+  ],
+  "deliveryFees": [
+    {
+      "name": "Joia",
+      "priceCents": 400
+    },
+    {
+      "name": "Vila do Bec",
+      "priceCents": 400
+    },
+    {
+      "name": "Planalto Boa Esperança",
+      "priceCents": 400
+    },
+    {
+      "name": "Baixa do Coco",
+      "priceCents": 400
+    },
+    {
+      "name": "Miguel Arraes",
+      "priceCents": 500
+    },
+    {
+      "name": "Parque Alvorada",
+      "priceCents": 600
+    },
+    {
+      "name": "Demais bairros",
+      "priceCents": 800
+    }
+  ]
+}

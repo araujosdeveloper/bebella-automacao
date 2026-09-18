@@ -4,8 +4,9 @@ import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import type { MenuItem } from "@/lib/menu-data";
-import { formatPrice, itemOrderLink } from "@/lib/menu-data";
+import { formatPrice } from "@/lib/menu-data";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { AddToCartButton } from "./OrderCart";
 
 export function ProductCard({ product }: { product: MenuItem }) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -36,10 +37,8 @@ export function ProductCard({ product }: { product: MenuItem }) {
           <h3 className="text-base font-extrabold leading-tight text-slate-50">{product.name}</h3>
           <span className="price-chip">{formatPrice(product.price)}</span>
         </div>
-        <p className="mt-1.5 line-clamp-3 text-sm leading-6 text-slate-400">{product.ingredients}</p>
-        <a href={itemOrderLink(`o Hot Dog ${product.name}`)} target="_blank" rel="noopener noreferrer" className="order-link mt-4 inline-flex items-center justify-center gap-2 self-start" aria-label={`Pedir Hot Dog ${product.name} pelo WhatsApp`}>
-          Pedir <WhatsAppIcon className="size-4" /> <MessageCircle className="size-3.5" />
-        </a>
+        <p className="mt-1.5 text-sm leading-6 text-slate-400">{product.ingredients}</p>
+        <div className="mt-4 flex flex-wrap gap-2"><AddToCartButton item={product} /><a href={`https://wa.me/5586999312177?text=${encodeURIComponent(`Olá, quero montar um pedido com o Hot Dog ${product.name} da Bebella Hot Dog.`)}`} target="_blank" rel="noopener noreferrer" className="order-link" aria-label={`Pedir Hot Dog ${product.name} pelo WhatsApp`}><WhatsAppIcon className="size-4" /> <MessageCircle className="size-3.5" /></a></div>
       </div>
     </article>
   );

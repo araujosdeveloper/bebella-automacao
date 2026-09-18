@@ -45,6 +45,17 @@ body {
 .drink-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: #121820; padding: .95rem 1rem; }
 .drink-icon { display: inline-flex; flex: none; width: 2.5rem; height: 2.5rem; align-items: center; justify-content: center; border-radius: .95rem; background: rgba(255,176,32,.1); color: #ffb020; }
 .info-card { border: 1px solid rgba(255,255,255,.06); border-radius: 1.25rem; background: #121820; padding: 1.15rem; box-shadow: 0 16px 36px rgba(0,0,0,.18); }
+.cart-fab { position: fixed; right: 1rem; bottom: 5rem; z-index: 51; display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,176,32,.42); border-radius: 999px; background: #ffb020; padding: .8rem 1rem; color: #1b1305; font-size: .82rem; font-weight: 950; box-shadow: 0 14px 30px rgba(0,0,0,.3); }
+.cart-fab span { display: inline-flex; min-width: 1.35rem; height: 1.35rem; align-items: center; justify-content: center; border-radius: 999px; background: #121820; color: #ffb020; font-size: .72rem; }
+.cart-backdrop { position: fixed; inset: 0; z-index: 60; display: flex; justify-content: flex-end; background: rgba(0,0,0,.66); padding: 1rem; }
+.cart-panel { width: min(100%, 28rem); max-height: calc(100vh - 2rem); overflow-y: auto; border: 1px solid rgba(255,255,255,.1); border-radius: 1.35rem; background: #10161e; padding: 1.2rem; box-shadow: 0 24px 70px rgba(0,0,0,.5); }
+.icon-button, .quantity-button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); color: #cbd5e1; }
+.icon-button { width: 2.25rem; height: 2.25rem; border-radius: .75rem; }
+.quantity-button { width: 1.75rem; height: 1.75rem; border-radius: .55rem; }
+.choice-button { border: 1px solid rgba(255,255,255,.12); border-radius: .8rem; padding: .7rem; color: #cbd5e1; font-size: .82rem; font-weight: 800; }
+.choice-button-active { border-color: rgba(255,176,32,.58); background: rgba(255,176,32,.12); color: #ffb020; }
+.checkout-input { width: 100%; border: 1px solid rgba(255,255,255,.12); border-radius: .8rem; background: rgba(255,255,255,.05); padding: .75rem; color: #f8fafc; font-size: .84rem; outline: none; }
+.checkout-input:focus { border-color: rgba(255,176,32,.6); }
 
 @media (min-width: 640px) {
   .menu-section { padding-top: 2.25rem; }

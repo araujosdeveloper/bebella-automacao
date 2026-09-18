@@ -8,17 +8,18 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionTitle } from "@/components/SectionTitle";
+import { AddToCartButton, OrderCartProvider } from "@/components/OrderCart";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0b0f14]">
+    <OrderCartProvider><main className="min-h-screen bg-[#0b0f14]">
       <Header />
       <Hero />
       <CategoryNav />
 
       <div className="menu-shell">
         <section id="hot-dogs" className="menu-section scroll-mt-32">
-          <SectionTitle eyebrow="Os favoritos" title="Hot Dogs" description="Caprichados, bem servidos e preparados na hora para você." icon={Flame} />
+          <SectionTitle eyebrow="Comece por aqui" title="Hot Dogs" description="Escolha seus itens e toque em Adicionar para montar o pedido." icon={Flame} />
           <div className="grid gap-3 md:grid-cols-2">
             {hotDogs.map((product) => <ProductCard key={product.name} product={product} />)}
           </div>
@@ -32,12 +33,13 @@ export default function Home() {
         </section>
 
         <section id="adicionais" className="menu-section scroll-mt-32">
-          <SectionTitle eyebrow="Do seu jeito" title="Adicionais" description="Peça seus extras junto com o hot dog pelo WhatsApp." icon={Plus} />
+          <SectionTitle eyebrow="Do seu jeito" title="Adicionais" description="Inclua extras no carrinho e confira tudo antes de enviar." icon={Plus} />
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {additions.map((item) => (
               <article key={item.name} className="small-menu-card">
                 <h3 className="text-sm font-bold leading-tight text-slate-50">{item.name}</h3>
                 <p className="mt-2 text-base font-black text-[#ffb020]">{formatPrice(item.price)}</p>
+                <div className="mt-3"><AddToCartButton item={item} /></div>
               </article>
             ))}
           </div>
@@ -49,7 +51,7 @@ export default function Home() {
             {drinks.map((item) => (
               <article key={item.name} className="drink-row">
                 <div className="flex min-w-0 items-center gap-3"><span className="drink-icon"><CupSoda className="size-5" /></span><h3 className="text-sm font-bold leading-snug text-slate-50">{item.name}</h3></div>
-                <p className="shrink-0 text-sm font-black text-[#ffb020]">{formatPrice(item.price)}</p>
+                <div className="flex shrink-0 items-center gap-3"><p className="text-sm font-black text-[#ffb020]">{formatPrice(item.price)}</p><AddToCartButton item={item} /></div>
               </article>
             ))}
           </div>
@@ -62,15 +64,16 @@ export default function Home() {
               <div className="inline-flex size-11 items-center justify-center rounded-2xl bg-[#ffb020]/10 text-[#ffb020]"><Store className="size-5" /></div>
               <h3 className="mt-4 text-lg font-black text-slate-50">Retire no local</h3>
               <p className="mt-3 flex items-start gap-2 text-sm font-semibold leading-6 text-slate-300"><MapPin className="mt-0.5 size-4 shrink-0 text-[#ffb020]" />Marginal BR 226, Bairro Joia, Timon-MA, próximo à Igreja Filadélfia.</p>
-              <div className="mt-4 flex items-start gap-2 rounded-2xl border border-[#ffb020]/15 bg-[#ffb020]/10 p-3 text-sm font-semibold leading-6 text-amber-100"><MessageCircle className="mt-0.5 size-4 shrink-0 text-[#ffb020]" />Para entrega, informe seu bairro no WhatsApp para confirmação da taxa.</div>
+              <div className="mt-4 flex items-start gap-2 rounded-2xl border border-[#ffb020]/15 bg-[#ffb020]/10 p-3 text-sm font-semibold leading-6 text-amber-100"><MessageCircle className="mt-0.5 size-4 shrink-0 text-[#ffb020]" />No checkout, informe o endereço. A Bella confirma a disponibilidade e a taxa pelo WhatsApp.</div>
             </div>
             <div className="overflow-hidden rounded-3xl border border-white/[0.06] bg-[#121820]">
-              <div className="border-b border-white/[0.06] px-5 py-4"><h3 className="text-lg font-black text-slate-50">Taxas de entrega</h3></div>
+              <div className="border-b border-white/[0.06] px-5 py-4"><h3 className="text-lg font-black text-slate-50">Entrega e pagamento</h3><p className="mt-1 text-xs font-semibold text-slate-400">Taxa confirmada pela equipe conforme o endereço.</p></div>
               <div className="divide-y divide-white/[0.06] px-5">
                 {deliveryFees.map((fee) => (
                   <div key={fee.name} className="flex items-center justify-between gap-4 py-3.5 text-sm"><span className="font-semibold text-slate-300">{fee.name}</span><span className="font-black text-[#ffb020]">{formatPrice(fee.price)}</span></div>
                 ))}
               </div>
+              <div className="border-t border-white/[0.06] px-5 py-4"><p className="text-xs font-bold uppercase tracking-[.14em] text-[#ffb020]">Pagamento</p><p className="mt-2 text-sm font-semibold leading-6 text-slate-300">Espécie, Pix e cartão. No Pix, chave telefone <strong className="text-slate-100">86999312177</strong>.</p></div>
             </div>
           </div>
         </section>
@@ -78,6 +81,6 @@ export default function Home() {
 
       <Footer />
       <FloatingWhatsAppButton />
-    </main>
+    </main></OrderCartProvider>
   );
 }

@@ -50,11 +50,11 @@ export const drinks: MenuItem[] = [
 ];
 
 export const deliveryFees: MenuItem[] = [
-  { name: "Joia", price: 5 },
-  { name: "Vila do Bec", price: 5 },
-  { name: "Planalto Boa Esperança", price: 5 },
-  { name: "Baixa do Coco", price: 5 },
-  { name: "Miguel Arraes", price: 6 },
+  { name: "Joia", price: 4 },
+  { name: "Vila do Bec", price: 4 },
+  { name: "Planalto Boa Esperança", price: 4 },
+  { name: "Baixa do Coco", price: 4 },
+  { name: "Miguel Arraes", price: 5 },
   { name: "Parque Alvorada", price: 6 },
   { name: "Demais bairros", price: 8 },
 ];

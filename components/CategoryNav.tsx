@@ -1,9 +1,9 @@
 const categories = [
   ["Hot Dogs", "#hot-dogs"],
   ["Combos", "#combos"],
-  ["Adicionais", "#adicionais"],
   ["Bebidas", "#bebidas"],
-  ["Entrega", "#entrega"],
+  ["Adicionais", "#adicionais"],
+  ["Entrega e pagamento", "#entrega"],
 ];
 
 export function CategoryNav() {

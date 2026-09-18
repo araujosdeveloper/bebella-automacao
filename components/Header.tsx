@@ -1,4 +1,3 @@
-import { generalOrderLink } from "@/lib/menu-data";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function Header() {
@@ -11,10 +10,10 @@ export function Header() {
             Bebella <span className="text-[#ffb020]">Hot Dog</span>
           </p>
         </a>
-        <a className="whatsapp-button shrink-0 rounded-full px-4 py-2.5 text-xs sm:px-5 sm:text-sm" href={generalOrderLink} target="_blank" rel="noopener noreferrer">
+        <a className="whatsapp-button shrink-0 rounded-full px-4 py-2.5 text-xs sm:px-5 sm:text-sm" href="#hot-dogs">
           <WhatsAppIcon className="size-4" />
-          <span className="hidden sm:inline">Fazer pedido</span>
-          <span className="sm:hidden">Pedir</span>
+          <span className="hidden sm:inline">Montar pedido</span>
+          <span className="sm:hidden">Montar</span>
         </a>
       </div>
     </header>

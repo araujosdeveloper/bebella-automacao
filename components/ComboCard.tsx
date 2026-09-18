@@ -2,6 +2,7 @@ import { Tag } from "lucide-react";
 import type { MenuItem } from "@/lib/menu-data";
 import { formatPrice, itemOrderLink } from "@/lib/menu-data";
 import { WhatsAppIcon } from "./WhatsAppIcon";
+import { AddToCartButton } from "./OrderCart";
 
 export function ComboCard({ combo, index }: { combo: MenuItem; index: number }) {
   return (
@@ -15,9 +16,7 @@ export function ComboCard({ combo, index }: { combo: MenuItem; index: number }) 
       </div>
       <div className="mt-4 flex items-center justify-between gap-3">
         <span className="price-chip">{formatPrice(combo.price)}</span>
-        <a href={itemOrderLink(`o combo ${combo.name}`)} target="_blank" rel="noopener noreferrer" className="order-link" aria-label={`Pedir combo ${combo.name} pelo WhatsApp`}>
-          Pedir <WhatsAppIcon className="size-4" />
-        </a>
+        <div className="flex flex-wrap gap-2"><AddToCartButton item={combo} /><a href={itemOrderLink(`o combo ${combo.name}`)} target="_blank" rel="noopener noreferrer" className="order-link" aria-label={`Pedir combo ${combo.name} pelo WhatsApp`}><WhatsAppIcon className="size-4" /></a></div>
       </div>
     </article>
   );

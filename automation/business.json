@@ -1,0 +1,19 @@
+{
+  "name": "Bebella Hot Dog",
+  "website": "https://bebellahotdog.com",
+  "address": "Marginal BR 226, Bairro Joia, Timon-MA, próximo à Igreja Filadélfia.",
+  "timezone": "America/Fortaleza",
+  "openingHours": "Segunda a sexta-feira, das 18:00 às 23:00 (horário local de Timon-MA).",
+  "paymentMethods": {
+    "cash": "Espécie",
+    "pix": {
+      "label": "Pix",
+      "key": "86999312177",
+      "keyType": "Telefone",
+      "holderName": "Roberto Alves de Araujo"
+    },
+    "card": "Cartão"
+  },
+  "humanHandoff": "Atendimento humano somente em último caso: reclamação, solicitação explícita de pessoa, dúvida de alergênicos, divergência de preço, falha técnica ou situação que a automação não consiga resolver. Não prometer transferência nem afirmar que alguém foi notificado sem confirmação do sistema.",
+  "orderAcceptance": "A automação conduz o atendimento e prepara o pedido. Não afirmar registro, aceite, pagamento ou envio à cozinha sem confirmação de um sistema; escalar para humano somente em último caso."
+}
