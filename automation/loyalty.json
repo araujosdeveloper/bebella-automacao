@@ -4,7 +4,8 @@
   "eligibleProduct": "Hot Dog Tradicional",
   "reward": "1 Hot Dog Tradicional grátis",
   "threshold": 20,
-  "carryOver": true,
+  "carryOver": false,
+  "monthlyOnly": true,
   "countOnlyConfirmedOrders": true,
   "monthlyHistory": true,
   "redemptionRequiresStoreConfirmation": true

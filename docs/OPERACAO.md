@@ -20,7 +20,8 @@
 ## Fidelidade
 
 O módulo registra somente pedidos confirmados e mantém o histórico mensal no SQLite.
-A cada 20 hot dogs elegíveis, um prêmio de Hot Dog Tradicional fica disponível.
+A cada 20 hot dogs elegíveis dentro do mês em curso, um prêmio de Hot Dog Tradicional
+fica disponível. O saldo não passa para o mês seguinte.
 
 No container Hermes, registre um pedido confirmado usando um identificador único:
 

@@ -93,7 +93,8 @@ Marketing, promoções e cupons:
 Fidelidade:
 - O programa conta apenas hot dogs de pedidos confirmados pela loja. A cada 20 hot dogs
   elegíveis, o cliente pode receber 1 Hot Dog Tradicional grátis.
-- O saldo é acumulado entre os meses; o histórico mensal serve para consulta e auditoria.
+- A contagem não é acumulada entre os meses: somente os hot dogs confirmados no mês em
+  curso valem para o prêmio, e o saldo é reiniciado no primeiro dia do mês seguinte.
 - Nunca confirme prêmio, saldo ou resgate sem consultar o registro de fidelidade. O prêmio
   depende da confirmação da loja e não pode ser trocado por dinheiro ou outro produto.
 

@@ -49,6 +49,7 @@ def connect(path: Path) -> sqlite3.Connection:
         CREATE TABLE IF NOT EXISTS rewards (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           phone TEXT NOT NULL REFERENCES customers(phone),
+          month TEXT NOT NULL,
           earned_at TEXT NOT NULL,
           redeemed_at TEXT,
           code TEXT UNIQUE NOT NULL
@@ -57,6 +58,12 @@ def connect(path: Path) -> sqlite3.Connection:
         CREATE INDEX IF NOT EXISTS rewards_phone_redeemed ON rewards(phone, redeemed_at);
         """
     )
+    reward_columns = {row["name"] for row in db.execute("PRAGMA table_info(rewards)")}
+    if "month" not in reward_columns:
+        # Banco criado pela versão anterior: prêmios antigos não podem ser usados
+        # no mês corrente e ficam identificados como legado para auditoria.
+        db.execute("ALTER TABLE rewards ADD COLUMN month TEXT NOT NULL DEFAULT 'legacy'")
+        db.commit()
     return db
 
 
@@ -89,34 +96,35 @@ def record_order(db: sqlite3.Connection, args: argparse.Namespace) -> None:
     except sqlite3.IntegrityError as exc:
         raise ValueError("esse pedido já foi registrado") from exc
     total = db.execute(
-        "SELECT COALESCE(SUM(eligible_hotdogs), 0) AS total FROM orders WHERE phone=?", (phone,)
+        "SELECT COALESCE(SUM(eligible_hotdogs), 0) AS total FROM orders WHERE phone=? AND month=?", (phone, month)
     ).fetchone()["total"]
     earned = total // 20
     redeemed = db.execute(
-        "SELECT COUNT(*) AS total FROM rewards WHERE phone=? AND redeemed_at IS NOT NULL", (phone,)
+        "SELECT COUNT(*) AS total FROM rewards WHERE phone=? AND month=? AND redeemed_at IS NOT NULL", (phone, month)
     ).fetchone()["total"]
     for _ in range(max(0, earned - redeemed)):
         code = "LOY-" + stamp.strftime("%Y%m") + "-" + secrets.token_hex(3).upper()
-        db.execute("INSERT INTO rewards(phone, earned_at, code) VALUES(?,?,?)", (phone, stamp.isoformat(), code))
+        db.execute("INSERT INTO rewards(phone, month, earned_at, code) VALUES(?,?,?,?)", (phone, month, stamp.isoformat(), code))
     db.commit()
     available = db.execute(
-        "SELECT COUNT(*) AS total FROM rewards WHERE phone=? AND redeemed_at IS NULL", (phone,)
+        "SELECT COUNT(*) AS total FROM rewards WHERE phone=? AND month=? AND redeemed_at IS NULL", (phone, month)
     ).fetchone()["total"]
     print(f"Pedido registrado. Cliente {phone}: {total} hot dogs, {available} prêmio(s) disponível(is).")
 
 
 def balance(db: sqlite3.Connection, args: argparse.Namespace) -> None:
     phone = digits(args.phone)
-    total = db.execute("SELECT COALESCE(SUM(eligible_hotdogs),0) AS total FROM orders WHERE phone=?", (phone,)).fetchone()["total"]
-    available = db.execute("SELECT COUNT(*) AS total FROM rewards WHERE phone=? AND redeemed_at IS NULL", (phone,)).fetchone()["total"]
     month = args.month or date.today().strftime("%Y-%m")
+    total = db.execute("SELECT COALESCE(SUM(eligible_hotdogs),0) AS total FROM orders WHERE phone=? AND month=?", (phone, month)).fetchone()["total"]
+    available = db.execute("SELECT COUNT(*) AS total FROM rewards WHERE phone=? AND month=? AND redeemed_at IS NULL", (phone, month)).fetchone()["total"]
     monthly = db.execute("SELECT COALESCE(SUM(eligible_hotdogs),0) AS total FROM orders WHERE phone=? AND month=?", (phone, month)).fetchone()["total"]
-    print(f"Cliente: {phone}\nHot dogs no mês {month}: {monthly}\nHot dogs acumulados: {total}\nPrêmios disponíveis: {available}")
+    print(f"Cliente: {phone}\nHot dogs no mês {month}: {monthly}\nHot dogs válidos para este mês: {total}\nPrêmios disponíveis neste mês: {available}")
 
 
 def redeem(db: sqlite3.Connection, args: argparse.Namespace) -> None:
     phone = digits(args.phone)
-    row = db.execute("SELECT id, code FROM rewards WHERE phone=? AND redeemed_at IS NULL ORDER BY id LIMIT 1", (phone,)).fetchone()
+    month = args.month or date.today().strftime("%Y-%m")
+    row = db.execute("SELECT id, code FROM rewards WHERE phone=? AND month=? AND redeemed_at IS NULL ORDER BY id LIMIT 1", (phone, month)).fetchone()
     if not row:
         raise ValueError("o cliente ainda não tem prêmio disponível")
     db.execute("UPDATE rewards SET redeemed_at=? WHERE id=?", (now().isoformat(), row["id"]))
@@ -149,7 +157,7 @@ def main() -> None:
     p.add_argument("--name"); p.add_argument("--order-id"); p.add_argument("--month")
     p.set_defaults(func=record_order)
     p = sub.add_parser("balance"); p.add_argument("--phone", required=True); p.add_argument("--month"); p.set_defaults(func=balance)
-    p = sub.add_parser("redeem"); p.add_argument("--phone", required=True); p.set_defaults(func=redeem)
+    p = sub.add_parser("redeem"); p.add_argument("--phone", required=True); p.add_argument("--month"); p.set_defaults(func=redeem)
     p = sub.add_parser("report"); p.add_argument("--month"); p.set_defaults(func=report)
     args = parser.parse_args()
     with connect(args.db) as db:
