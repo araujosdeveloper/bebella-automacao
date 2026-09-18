@@ -61,6 +61,7 @@ docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/orders.py \
 ```
 
 Comandos de confirmação da loja devem ser executados somente por pessoa autorizada.
+O administrador autorizado atualmente é o número `5586988871514`.
 
 ## Emergência
 
