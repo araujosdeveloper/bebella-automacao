@@ -1,0 +1,26 @@
+{
+  "enabled": false,
+  "approvalRequired": true,
+  "provider": "whatsapp",
+  "consent": {
+    "optInKeywords": ["QUERO PROMOÇÕES", "QUERO PROMOCOES", "RECEBER OFERTAS"],
+    "optOutKeywords": ["PARAR PROMOÇÕES", "PARAR PROMOCOES", "SAIR", "CANCELAR OFERTAS"],
+    "categories": ["ofertas", "cupons", "novidades"],
+    "requireBusinessNameInNotice": true
+  },
+  "campaigns": [],
+  "couponRules": {
+    "codeRequired": true,
+    "validFromRequired": true,
+    "validUntilRequired": true,
+    "usageLimitRequired": true,
+    "storeMustConfirmAvailability": true
+  },
+  "safety": {
+    "neverMessageWithoutOptIn": true,
+    "respectOptOutImmediately": true,
+    "manualApprovalBeforeSend": true,
+    "useApprovedTemplateOutsideCustomerWindow": true,
+    "dryRunByDefault": true
+  }
+}

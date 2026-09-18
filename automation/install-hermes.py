@@ -62,6 +62,7 @@ payloads = {
     'config.yaml': updated,
     'SOUL.md': (source / 'generated/SOUL.md').read_text(),
     'bebella-catalog.json': (source / 'generated/catalog.json').read_text(),
+    'marketing.json': (source / 'marketing.json').read_text(),
 }
 for name, content in payloads.items():
     temp = home / ('.bebella-' + name)
