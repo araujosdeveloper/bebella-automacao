@@ -41,6 +41,27 @@ docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/loyalty.py --db /
 
 Faça backup do arquivo `bebella-loyalty.sqlite3` junto com os dados do Hermes.
 
+## Confirmação de pedido
+
+Cada pedido deve passar por confirmação do cliente e depois da loja. O código é gerado
+antes da confirmação e só o comando administrativo `store-confirm` lança as unidades
+na fidelidade:
+
+```sh
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/orders.py \
+  --db /opt/data/bebella-orders.sqlite3 create \
+  --phone 5586999312177 --name "Cliente" --hotdogs 2 \
+  --summary "2 Hot Dogs Tradicionais"
+
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/orders.py \
+  --db /opt/data/bebella-orders.sqlite3 customer-confirm --code BEB-AAAAMMDD-0000
+
+docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/orders.py \
+  --db /opt/data/bebella-orders.sqlite3 store-confirm --code BEB-AAAAMMDD-0000
+```
+
+Comandos de confirmação da loja devem ser executados somente por pessoa autorizada.
+
 ## Emergência
 
 Ver status do site:

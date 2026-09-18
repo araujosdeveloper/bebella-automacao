@@ -64,6 +64,8 @@ payloads = {
     'bebella-catalog.json': (source / 'generated/catalog.json').read_text(),
     'marketing.json': (source / 'marketing.json').read_text(),
     'loyalty.json': (source / 'loyalty.json').read_text(),
+    'loyalty.py': (source / 'loyalty.py').read_text(),
+    'orders.py': (source / 'orders.py').read_text(),
 }
 for name, content in payloads.items():
     temp = home / ('.bebella-' + name)
