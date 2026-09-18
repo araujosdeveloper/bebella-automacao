@@ -47,6 +47,10 @@ Cada pedido deve passar por confirmação do cliente e depois da loja. O código
 antes da confirmação e só o comando administrativo `store-confirm` lança as unidades
 na fidelidade:
 
+Quando a Bella envia o resumo final, o bridge cria automaticamente o pedido e acrescenta
+o código ao texto. Quando o cliente responde `CONFIRMO`, o pedido passa para
+`aguardando_loja`; a loja então usa o comando administrativo para finalizar.
+
 ```sh
 docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/orders.py \
   --db /opt/data/bebella-orders.sqlite3 create \

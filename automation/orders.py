@@ -61,6 +61,13 @@ def create(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
         raise ValueError("a quantidade de hot dogs não pode ser negativa")
     code = new_code()
     now = datetime.now(timezone.utc)
+    existing = conn.execute(
+        "SELECT code FROM orders WHERE phone=? AND summary=? AND status='aguardando_cliente' ORDER BY created_at DESC LIMIT 1",
+        (phone(args.phone), args.summary),
+    ).fetchone()
+    if existing:
+        print(f"Pedido já criado: {existing['code']}\nStatus: aguardando_cliente")
+        return
     conn.execute(
         "INSERT INTO orders(code, phone, customer_name, summary, eligible_hotdogs, month, status, created_at) VALUES(?,?,?,?,?,?,?,?)",
         (code, phone(args.phone), args.name, args.summary, args.hotdogs, args.month or now.strftime("%Y-%m"), "aguardando_cliente", now.isoformat()),
@@ -78,6 +85,17 @@ def customer_confirm(conn: sqlite3.Connection, args: argparse.Namespace) -> None
     conn.execute("UPDATE orders SET status='aguardando_loja', customer_confirmed_at=? WHERE code=?", (stamp(), args.code.upper()))
     conn.commit()
     print(f"{args.code.upper()} aguardando confirmação da loja.")
+
+
+def customer_confirm_latest(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
+    latest = conn.execute(
+        "SELECT code FROM orders WHERE phone=? AND status='aguardando_cliente' ORDER BY created_at DESC LIMIT 1",
+        (phone(args.phone),),
+    ).fetchone()
+    if not latest:
+        raise ValueError("não há pedido aguardando confirmação do cliente")
+    args.code = latest["code"]
+    customer_confirm(conn, args)
 
 
 def store_confirm(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
@@ -126,6 +144,7 @@ def main() -> None:
     sub = parser.add_subparsers(dest="command", required=True)
     p = sub.add_parser("create"); p.add_argument("--phone", required=True); p.add_argument("--summary", required=True); p.add_argument("--hotdogs", required=True, type=int); p.add_argument("--name"); p.add_argument("--month"); p.set_defaults(func=create)
     p = sub.add_parser("customer-confirm"); p.add_argument("--code", required=True); p.set_defaults(func=customer_confirm)
+    p = sub.add_parser("customer-confirm-latest"); p.add_argument("--phone", required=True); p.set_defaults(func=customer_confirm_latest)
     p = sub.add_parser("store-confirm"); p.add_argument("--code", required=True); p.add_argument("--loyalty-db", type=Path, default=LOYALTY_DB); p.set_defaults(func=store_confirm)
     p = sub.add_parser("cancel"); p.add_argument("--code", required=True); p.set_defaults(func=cancel)
     p = sub.add_parser("show"); p.add_argument("--code", required=True); p.set_defaults(func=show)
