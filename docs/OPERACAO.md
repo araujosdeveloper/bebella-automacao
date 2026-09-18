@@ -62,6 +62,15 @@ docker exec hermes-agent-g80b-hermes-agent-1 python3 /opt/data/orders.py \
 
 Comandos de confirmação da loja devem ser executados somente por pessoa autorizada.
 O administrador autorizado atualmente é o número `5586988871514`.
+No WhatsApp, o administrador pode enviar diretamente ao número da Bebella:
+
+```text
+CONFIRMAR BEB-20260918-0000
+CANCELAR BEB-20260918-0000
+```
+
+O parser aceita esses comandos apenas em conversa individual do número autorizado;
+mensagens de clientes e grupos continuam sendo ignoradas para essa finalidade.
 
 ## Emergência
 
